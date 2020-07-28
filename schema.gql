@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+interface Character {
+  id: CustomID!
+  name: String!
+  friends: [Character!]!
+  appearsIn: [Episode!]!
+}
+
+"""CustomID scalar type"""
+scalar CustomID
+
+enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}
+
+type Query {
+  hero(episode: Episode!): [Character!]!
+}
