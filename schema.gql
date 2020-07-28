@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Starship {
+  id: ID!
+  name: String!
+  length: Float!
+}
+
+type Query {
+  hero(episode: Episode!): [Character!]!
+}
+
+union Character = Droid | Human
+
+type Droid {
+  id: ID!
+  name: String!
+  friends: [Character!]!
+  appearsIn: [Episode!]!
+  primaryFunction: String!
+}
+
+enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}
+
+type Human {
+  id: ID!
+  name: String!
+  friends: [Character!]!
+  appearsIn: [Episode!]!
+  starships: [Starship!]!
+  totalCredits: Float!
+}

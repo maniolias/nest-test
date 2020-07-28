@@ -1,12 +1,19 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, ID } from '@nestjs/graphql';
 
-import { Character, Episode } from './character.type';
+import { Character, Episode, CharacterUnion } from './character.union';
 
 @ObjectType()
 export class Droid implements Character {
+  @Field(() => ID)
   id: string;
+  
+  @Field(() => String)
   name: string;
+
+  @Field(() => [CharacterUnion])
   friends: Character[];
+
+  @Field(() => [Episode])
   appearsIn: Episode[];
 
   @Field(() => String)

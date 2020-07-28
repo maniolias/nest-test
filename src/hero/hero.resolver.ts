@@ -1,7 +1,7 @@
-import { Resolver, Query } from '@nestjs/graphql';
-import { Character, Episode } from './types/character.type';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 import { Human } from './types/human.type';
 import { Droid } from './types/droid.type';
+import { Character, Episode, CharacterUnion } from './types/character.union';
 
 @Resolver('Hero')
 export class HeroResolver {
@@ -24,9 +24,9 @@ export class HeroResolver {
   ];
   @Query(
     /* istanbul ignore next */
-    (): typeof Character => Character,
+    (): [typeof CharacterUnion] => [CharacterUnion],
   )
-  async hero(episode: Episode): Promise<Character> {
-    return this.heroes.find(hero => hero.appearsIn.indexOf(episode) !== -1);
+  async hero(@Args('episode', { type: () => Episode }) episode: Episode): Promise<Character[]> {
+    return this.heroes.filter(hero => hero.appearsIn.indexOf(episode) !== -1);
   }
 }
