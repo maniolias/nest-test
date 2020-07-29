@@ -18,6 +18,23 @@ enum Episode {
   JEDI
 }
 
+type Starship {
+  id: ID!
+  name: String!
+  length: Float!
+}
+
+type Human {
+  starships: [Starship!]!
+  totalCredits: Float!
+}
+
+type Droid {
+  primaryFunction: String!
+}
+
 type Query {
   hero(episode: Episode!): [Character!]!
+  humans: [Human!]!
+  droids: [Droid!]!
 }
