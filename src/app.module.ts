@@ -1,18 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { HeroResolver } from './hero/hero.resolver';
+import { DirectionsModule } from './directions/directions.module';
+import { RecipesModule } from './recipes/recipes.module';
 import { GraphQLModule } from '@nestjs/graphql';
-import { CustomIDScalar } from './hero/scalars/customID.scalar';
 
 @Module({
   imports: [
+    RecipesModule,
+    DirectionsModule,
     GraphQLModule.forRoot({
-      autoSchemaFile: './schema.gql',
-      context: ({ req }) => ({ req }),
+      debug: false,
+      installSubscriptionHandlers: true,
+      autoSchemaFile: true,
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, HeroResolver, CustomIDScalar],
 })
-export class AppModule {}
+export class ApplicationModule {}
